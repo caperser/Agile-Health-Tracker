@@ -6,7 +6,7 @@ const Sidebar = () => {
 
   return (
     <Drawer variant="permanent" anchor="left">
-      <List>
+      <List sx={{ mt: '70px' }}>
         <ListItemButton onClick={() => navigate('/')}>
           <ListItemText primary="Dashboard" />
         </ListItemButton>
