@@ -13,6 +13,9 @@ const Sidebar = () => {
         <ListItemButton onClick={() => navigate('/submit')}>
           <ListItemText primary="Submit Survey" />
         </ListItemButton>
+        <ListItemButton onClick={() => navigate('/results')}>
+          <ListItemText primary="Survey Results" />
+        </ListItemButton>
       </List>
     </Drawer>
   );

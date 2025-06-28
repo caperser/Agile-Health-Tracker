@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import { SubmitSurvey } from './pages/SubmitSurvey';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import theme from './theme';
+import SurveyResults from './pages/SurveyResults';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/submit" element={<SubmitSurvey />} />
+                <Route path="/results" element={<SurveyResults />} />
               </Routes>
             </Box>
           </Box>
