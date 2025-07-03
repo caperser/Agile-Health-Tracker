@@ -1,4 +1,15 @@
-import { Box, Typography, Slider, TextField, Button } from '@mui/material';
+import { submitSurvey } from '@/utils/submitSurvey';
+import {
+  Box,
+  Typography,
+  Slider,
+  TextField,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import { useState } from 'react';
 
 const SubmitSurvey = () => {
@@ -9,8 +20,7 @@ const SubmitSurvey = () => {
   const [commentsOnImprove, setCommentsOnImprove] = useState('');
   const [commentsOnWhatWentWell, setCommentsOnWhatWentWell] = useState('');
   const [commentsOnActionItems, setCommentsOnActionItems] = useState('');
-
-  const sprintNumber = 1; // Replace with actual sprint number logic
+  const [sprintNumber, setSprintNumber] = useState(1);
 
   const markValues = [1, 2, 3, 4, 5].map((value) => ({
     value,
@@ -18,11 +28,42 @@ const SubmitSurvey = () => {
   }));
 
   const handleSubmit = () => {
-    alert('Survey submitted (mock)');
+    submitSurvey({
+      technicalQuality,
+      morale,
+      workload,
+      collaboration,
+      sprintNumber,
+      commentsOnImprove,
+      commentsOnWentWell: commentsOnWhatWentWell,
+      commentsOnActionItems,
+    })
+      .then((id) => {
+        console.log('Survey submitted successfully with ID:', id);
+        // Optionally reset form or redirect user
+      })
+      .catch((error) => {
+        console.error('Error submitting survey:', error);
+        // Optionally show error message to user
+      });
   };
 
   return (
-    <Box p={4}>
+    <Box p={4} position="relative">
+      <FormControl size="small" sx={{ position: 'absolute', top: 16, right: 16, minWidth: 120 }}>
+        <InputLabel id="sprint-select-label">Sprint</InputLabel>
+        <Select
+          labelId="sprint-select-label"
+          id="sprint-select"
+          value={sprintNumber}
+          label="Sprint"
+          onChange={(e) => setSprintNumber(Number(e.target.value))}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+            <MenuItem key={num} value={num}>{`Sprint ${num}`}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       <Typography variant="h4" gutterBottom>
         Sprint {sprintNumber} Feedback
       </Typography>
